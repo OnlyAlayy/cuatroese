@@ -19,11 +19,11 @@ const Footer = () => {
             <div className="flex gap-4">
               {/* Instagram */}
               <a 
-                href="https://linktr.ee/cuatroeseclima" 
+                href="https://www.instagram.com/cuatroeseclima/" 
                 target="_blank" 
                 rel="noreferrer"
                 className="w-10 h-10 rounded-full bg-white shadow-[0_2px_10px_rgba(0,0,0,0.1)] flex items-center justify-center text-[#181E4B] hover:bg-[#F0BB1F] hover:text-white transition-colors"
-                aria-label="Linktree"
+                aria-label="Instagram"
               >
                 <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
