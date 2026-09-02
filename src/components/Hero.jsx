@@ -15,7 +15,7 @@ const Hero = () => {
             Servicio Técnico de{' '}
             <span className="relative inline-block">
               <span className="relative z-10">Calefacción</span>
-              <img src="/assets/underline.png" alt="" className="absolute -bottom-1 sm:-bottom-2 -left-1 sm:-left-2 w-[105%] sm:w-[110%] h-[15px] sm:h-[22px] object-fill -z-10" />
+              <img src="/assets/underline.png" alt="" aria-hidden="true" className="absolute bottom-[4px] left-[30px] w-full object-contain -z-10" />
             </span>
             <br />
             y Refrigeración
@@ -37,11 +37,12 @@ const Hero = () => {
         {/* Right image */}
         <div className="relative flex justify-center md:justify-end min-h-[500px]">
           
-          <div className="absolute inset-0 bg-[#F0BB1F] rounded-tl-[100px] rounded-br-[100px] -z-10 translate-x-6 translate-y-6"></div>
-          <img 
-            src="/assets/hero-traveler.jpg" 
-            alt="Técnico de refrigeración" 
-            className="relative z-10 rounded-tl-[100px] rounded-br-[100px] w-full h-[400px] md:h-[600px] object-cover shadow-2xl"
+
+          {/* Hero image */}
+          <img
+            src="/assets/hero-tecnico.png"
+            alt="Técnico de CLIMA 4S realizando mantenimiento de equipo de refrigeración"
+            className="w-full max-w-[550px] lg:max-w-[650px] object-contain relative z-10 -ml-10 md:-ml-24 lg:-ml-32"
           />
         </div>
       </div>
