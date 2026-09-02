@@ -17,7 +17,7 @@ const Footer = () => {
             <p className="text-[#5E6282] text-sm leading-relaxed">
               Mantenimiento profesional de calefacción y refrigeración. Nos anticipamos a los problemas para que tus equipos funcionen al 100% de su capacidad.
             </p>
-            <div className="flex gap-4">
+            <div className="hidden md:flex gap-4">
               {/* Instagram */}
               <a 
                 href="https://www.instagram.com/cuatroeseclima/" 
@@ -59,20 +59,37 @@ const Footer = () => {
           {/* Column 3: Contact */}
           <div>
             <h4 className="text-[#181E4B] font-bold text-xl mb-6">Contacto</h4>
-            <ul className="space-y-4">
-              <li className="flex items-start gap-3 text-[#5E6282]">
-                <Phone className="w-5 h-5 flex-shrink-0 text-[#DF6951]" />
-                <span className="font-medium">+54 11 1234-5678</span>
-              </li>
-              <li className="flex items-start gap-3 text-[#5E6282]">
-                <Mail className="w-5 h-5 flex-shrink-0 text-[#DF6951]" />
-                <span className="font-medium">contacto@cuatroese.com.ar</span>
-              </li>
-              <li className="flex items-start gap-3 text-[#5E6282]">
-                <MapPin className="w-5 h-5 flex-shrink-0 text-[#DF6951]" />
-                <span className="font-medium">Atención en Buenos Aires y alrededores</span>
-              </li>
-            </ul>
+            <div className="flex items-center justify-between gap-4">
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3 text-[#5E6282]">
+                  <Phone className="w-5 h-5 flex-shrink-0 text-[#DF6951]" />
+                  <span className="font-medium text-[15px] sm:text-base">+54 11 1234-5678</span>
+                </li>
+                <li className="flex items-start gap-3 text-[#5E6282]">
+                  <Mail className="w-5 h-5 flex-shrink-0 text-[#DF6951]" />
+                  <span className="font-medium text-[15px] sm:text-base break-all">contacto@cuatroese.com.ar</span>
+                </li>
+                <li className="flex items-start gap-3 text-[#5E6282]">
+                  <MapPin className="w-5 h-5 flex-shrink-0 text-[#DF6951]" />
+                  <span className="font-medium text-[15px] sm:text-base">Atención en Buenos Aires</span>
+                </li>
+              </ul>
+              
+              {/* Instagram Mobile (Sits to the right of the list) */}
+              <a 
+                href="https://www.instagram.com/cuatroeseclima/" 
+                target="_blank" 
+                rel="noreferrer"
+                className="md:hidden flex-shrink-0 w-12 h-12 rounded-full bg-white shadow-[0_2px_15px_rgba(0,0,0,0.08)] flex items-center justify-center text-[#181E4B] hover:bg-[#F0BB1F] hover:text-white transition-colors"
+                aria-label="Instagram"
+              >
+                <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+              </a>
+            </div>
           </div>
 
           {/* Column 4: Newsletter or CTA */}

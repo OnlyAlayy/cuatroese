@@ -56,14 +56,14 @@ const Testimonials = () => {
 
   return (
     <section id="testimonios" className="w-full max-w-7xl mx-auto px-6 py-24 relative">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
         
         {/* Left Side: Text and Pagination */}
         <div>
           <p className="text-[#5E6282] font-semibold text-lg uppercase tracking-wider mb-2">
             Testimonios
           </p>
-          <h2 className="font-heading text-4xl md:text-5xl text-[#14183E] capitalize mb-16">
+          <h2 className="font-heading text-4xl md:text-5xl text-[#14183E] capitalize mb-6 md:mb-16">
             Lo que dicen <br /> nuestros clientes.
           </h2>
 
