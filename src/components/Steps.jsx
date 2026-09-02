@@ -98,7 +98,7 @@ const Steps = () => {
             </div>
 
             {/* Overlapping small card */}
-            <div className="absolute -right-2 sm:-right-6 md:-right-12 bottom-10 bg-white rounded-2xl p-3 flex gap-3 shadow-[0_100px_80px_rgba(0,0,0,0.02),0_64.8px_46.85px_rgba(0,0,0,0.015),0_38.5px_25.48px_rgba(0,0,0,0.012)] w-[180px] sm:w-[200px]">
+            <div className="absolute right-0 sm:-right-6 md:-right-12 bottom-10 bg-white rounded-2xl p-3 flex gap-3 shadow-[0_100px_80px_rgba(0,0,0,0.02),0_64.8px_46.85px_rgba(0,0,0,0.015),0_38.5px_25.48px_rgba(0,0,0,0.012)] w-[180px] sm:w-[200px]">
               <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
                 <img src="/assets/hero-tecnico.png" alt="Técnico" className="w-full h-full object-cover bg-gray-100" />
               </div>

@@ -18,7 +18,7 @@ function App() {
     return () => clearTimeout(timer)
   }, [])
   return (
-    <div className="min-h-screen bg-white font-sans relative">
+    <div className="min-h-screen bg-white font-sans relative overflow-x-clip">
       {/* Background Decor */}
       <img
         src="/assets/decore.png"
