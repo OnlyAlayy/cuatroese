@@ -1,4 +1,4 @@
-import { Navigation, Shield, Award, Crown, CheckCircle2 } from 'lucide-react'
+import { Navigation, Shield, Award, Crown, CheckCircle2, MessageCircle } from 'lucide-react'
 
 const plans = [
   {
@@ -93,7 +93,7 @@ const PricingPlans = () => {
                   </div>
                 )}
 
-                <div className="h-36 overflow-hidden relative">
+                <div className="h-28 overflow-hidden relative">
                   <img 
                     src={plan.image} 
                     alt={plan.title} 
@@ -102,28 +102,28 @@ const PricingPlans = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                   
                   {/* Title overlay on image */}
-                  <div className="absolute bottom-3 left-5 right-5 flex justify-between items-end">
+                  <div className="absolute bottom-2 left-5 right-5 flex justify-between items-end">
                     <div>
                       <div className="flex items-center gap-2 mb-0.5">
                         <Icon className={`w-4 h-4 ${plan.isPopular ? 'text-[#F0BB1F]' : 'text-white'}`} />
                         <h3 className="text-white font-bold text-lg tracking-wide">{plan.title}</h3>
                       </div>
-                      <p className="text-white/90 text-[13px] font-medium">{plan.subtitle}</p>
+                      <p className="text-white/90 text-[12px] font-medium">{plan.subtitle}</p>
                     </div>
                   </div>
                 </div>
                 
-                <div className="p-6">
-                  <p className="text-[#5E6282] text-[13px] italic mb-4">
+                <div className="p-5">
+                  <p className="text-[#5E6282] text-[12px] italic mb-3 line-clamp-1">
                     "{plan.description}"
                   </p>
                   
-                  <div className="flex items-center gap-2 text-[#14183E] font-bold mb-4 pb-4 border-b border-gray-100">
+                  <div className="flex items-center gap-2 text-[#14183E] font-bold mb-3 pb-3 border-b border-gray-100">
                     <Navigation className={`w-4 h-4 ${plan.accentColor}`} fill="currentColor" />
-                    <span className="text-[14px]">{plan.duration}</span>
+                    <span className="text-[13px]">{plan.duration}</span>
                   </div>
 
-                  <ul className="text-[13px] text-[#5E6282] space-y-3 mb-6">
+                  <ul className="text-[13px] text-[#5E6282] space-y-2 mb-4">
                     {plan.features.map((feature, i) => (
                       <li key={i} className="flex items-start gap-2">
                         <CheckCircle2 className={`w-4 h-4 flex-shrink-0 mt-[2px] ${plan.bulletColor}`} />
@@ -132,13 +132,28 @@ const PricingPlans = () => {
                     ))}
                   </ul>
 
-                  <div className="mt-auto pt-4 border-t border-gray-100 text-center">
-                    <p className="text-[11px] font-bold text-[#14183E] uppercase tracking-wider">
+                  <div className="mt-auto pt-3 border-t border-gray-100 text-center flex flex-col items-center">
+                    <p className="text-[10px] font-bold text-[#14183E] uppercase tracking-wider mb-1">
                       Beneficios clave
                     </p>
-                    <p className={`text-[12px] mt-1 font-medium ${plan.accentColor}`}>
+                    <p className={`text-[11px] font-medium ${plan.accentColor} mb-4`}>
                       {plan.benefits}
                     </p>
+                    
+                    <a
+                      href="https://wa.me/541112345678"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl font-bold text-white transition-transform hover:-translate-y-1 shadow-[0_8px_20px_rgba(0,0,0,0.1)] ${
+                        index === 1 ? 'bg-[#F0BB1F] hover:bg-[#d9a51a]' : 
+                        index === 2 ? 'bg-[#DF6951] hover:bg-[#c95943]' : 
+                        'bg-[#5E6282] hover:bg-[#4a4d6b]'
+                      }`}
+                      aria-label={`Consultar por el plan ${plan.title} en WhatsApp`}
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      <span className="text-[14px]">Consultar por WhatsApp</span>
+                    </a>
                   </div>
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import { Check, Phone } from 'lucide-react'
+import { Check, MessageCircle } from 'lucide-react'
 
 const PricingCard = ({ plan, featured = false }) => {
   const themeClass = `plan-${plan.theme}`
@@ -78,15 +78,15 @@ const PricingCard = ({ plan, featured = false }) => {
           {plan.slogan}
         </p>
         <a
-          href="https://wa.me/5491100000000"
+          href="https://wa.me/541112345678"
           target="_blank"
           rel="noopener noreferrer"
           className={`cta-button ${ctaClass}`}
-          aria-label={`Consultar por el plan ${plan.name}`}
+          aria-label={`Consultar por el plan ${plan.name} en WhatsApp`}
           tabIndex={0}
         >
-          <Phone className="w-4 h-4" strokeWidth={2.5} />
-          Consultar Plan
+          <MessageCircle className="w-5 h-5" strokeWidth={2.5} />
+          Consultar por WhatsApp
         </a>
       </div>
 
