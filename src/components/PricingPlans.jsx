@@ -78,10 +78,13 @@ const PricingPlans = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 relative z-10">
           {plans.map((plan, index) => {
             const Icon = plan.icon
+            // Silver (0) goes to 2nd place on mobile. Gold (1) goes to 1st place on mobile.
+            const orderClass = index === 0 ? 'order-2 lg:order-1' : index === 1 ? 'order-1 lg:order-2' : 'order-3'
+            
             return (
               <div 
                 key={index} 
-                className={`bg-white rounded-[24px] overflow-hidden shadow-[0_1.85px_3.15px_0_rgba(0,0,0,0.02),0_8.15px_6.52px_0_rgba(0,0,0,0.028),0_20px_13px_0_rgba(0,0,0,0.035),0_38.5px_25.48px_0_rgba(0,0,0,0.042),0_64.8px_46.85px_0_rgba(0,0,0,0.05),0_100px_80px_0_rgba(0,0,0,0.07)] transition-transform hover:-translate-y-2 duration-300 group relative border-2 ${plan.isPopular ? 'border-[#F0BB1F]/30' : 'border-transparent'}`}
+                className={`bg-white rounded-[24px] overflow-hidden shadow-[0_1.85px_3.15px_0_rgba(0,0,0,0.02),0_8.15px_6.52px_0_rgba(0,0,0,0.028),0_20px_13px_0_rgba(0,0,0,0.035),0_38.5px_25.48px_0_rgba(0,0,0,0.042),0_64.8px_46.85px_0_rgba(0,0,0,0.05),0_100px_80px_0_rgba(0,0,0,0.07)] transition-transform hover:-translate-y-2 duration-300 group relative border-2 ${plan.isPopular ? 'border-[#F0BB1F]/30' : 'border-transparent'} ${orderClass}`}
               >
                 {/* Popular Badge */}
                 {plan.isPopular && (

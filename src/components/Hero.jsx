@@ -35,9 +35,7 @@ const Hero = () => {
         </div>
 
         {/* Right image */}
-        <div className="relative flex justify-center md:justify-end min-h-[500px]">
-          
-
+        <div className="hidden md:flex relative justify-end min-h-[500px]">
           {/* Hero image */}
           <img
             src="/assets/hero-tecnico.png"

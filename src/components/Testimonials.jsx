@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ChevronUp, ChevronDown } from 'lucide-react'
 
 const testimonials = [
@@ -23,7 +23,6 @@ const testimonials = [
 ]
 
 const Testimonials = () => {
-  // ... (keep state exactly as is)
   const [currentIndex, setCurrentIndex] = useState(0)
 
   const handleNext = () => {
@@ -33,6 +32,15 @@ const Testimonials = () => {
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
   }
+
+  // Auto-play interval
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext()
+    }, 5000) // Change testimonial every 5 seconds
+    
+    return () => clearInterval(interval)
+  }, []) // Empty dependency array means it sets up once, but wait, handleNext uses functional update so it's safe without dependencies.
 
   const currentTestimonial = testimonials[currentIndex]
   const nextTestimonial = testimonials[(currentIndex + 1) % testimonials.length]
@@ -74,7 +82,7 @@ const Testimonials = () => {
             <div className="bg-white rounded-[10px] p-8 shadow-[0_100px_80px_rgba(0,0,0,0.02),0_64.8px_46.85px_rgba(0,0,0,0.015),0_38.5px_25.48px_rgba(0,0,0,0.012)] relative z-20 mt-10 transition-all duration-500 ease-in-out">
               
               {/* Profile Image */}
-              <div className="absolute -top-8 -left-8 w-16 h-16 rounded-full overflow-hidden shadow-lg border-2 border-white">
+              <div className="absolute -top-8 -left-2 sm:-left-4 md:-left-8 w-16 h-16 rounded-full overflow-hidden shadow-lg border-2 border-white">
                 <img 
                   key={currentTestimonial.image} // Force re-render for animation if needed, or just let it swap
                   src={currentTestimonial.image} 

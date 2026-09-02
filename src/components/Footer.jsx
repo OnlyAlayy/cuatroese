@@ -2,13 +2,13 @@ import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react'
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-[#FAFAFA] pt-24 pb-12 mt-20 relative overflow-hidden">
+    <footer className="w-full bg-[#FAFAFA] pt-12 md:pt-24 pb-8 md:pb-12 mt-12 md:mt-20 relative overflow-hidden">
       
       {/* Decorative Blob */}
       <div className="absolute right-0 bottom-0 w-64 h-64 bg-[#DF6951] opacity-5 rounded-tl-[100%] -z-0"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-16">
           
           {/* Column 1: Brand */}
           <div className="space-y-6">
