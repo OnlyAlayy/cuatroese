@@ -24,26 +24,35 @@ const testimonials = [
 
 const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAnimating, setIsAnimating] = useState(false)
+
+  const changeTestimonial = (newIndex) => {
+    if (isAnimating) return
+    setIsAnimating(true)
+    setTimeout(() => {
+      setCurrentIndex(newIndex)
+      setIsAnimating(false)
+    }, 300) // Duration of the exit animation
+  }
 
   const handleNext = () => {
-    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+    changeTestimonial((currentIndex + 1) % testimonials.length)
   }
 
   const handlePrev = () => {
-    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+    changeTestimonial((currentIndex - 1 + testimonials.length) % testimonials.length)
   }
 
   // Auto-play interval
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext()
-    }, 5000) // Change testimonial every 5 seconds
+    }, 5000) 
     
     return () => clearInterval(interval)
-  }, []) // Empty dependency array means it sets up once, but wait, handleNext uses functional update so it's safe without dependencies.
+  }, [currentIndex, isAnimating]) 
 
   const currentTestimonial = testimonials[currentIndex]
-  const nextTestimonial = testimonials[(currentIndex + 1) % testimonials.length]
 
   return (
     <section id="testimonios" className="w-full max-w-7xl mx-auto px-6 py-24 relative">
@@ -79,15 +88,15 @@ const Testimonials = () => {
           <div className="relative w-full max-w-[500px]">
             
             {/* Front Card */}
-            <div className="bg-white rounded-[10px] p-8 shadow-[0_100px_80px_rgba(0,0,0,0.02),0_64.8px_46.85px_rgba(0,0,0,0.015),0_38.5px_25.48px_rgba(0,0,0,0.012)] relative z-20 mt-10 transition-all duration-500 ease-in-out">
+            <div className={`bg-white rounded-[10px] p-8 shadow-[0_100px_80px_rgba(0,0,0,0.02),0_64.8px_46.85px_rgba(0,0,0,0.015),0_38.5px_25.48px_rgba(0,0,0,0.012)] relative z-20 mt-10 transition-all duration-300 ease-in-out ${isAnimating ? 'opacity-0 translate-y-8 scale-95' : 'opacity-100 translate-y-0 scale-100'}`}>
               
               {/* Profile Image */}
               <div className="absolute -top-8 -left-2 sm:-left-4 md:-left-8 w-16 h-16 rounded-full overflow-hidden shadow-lg border-2 border-white">
                 <img 
-                  key={currentTestimonial.image} // Force re-render for animation if needed, or just let it swap
+                  key={currentTestimonial.image} 
                   src={currentTestimonial.image} 
                   alt={currentTestimonial.name} 
-                  className="w-full h-full object-cover object-top bg-[#F0BB1F] animate-fade-in" 
+                  className="w-full h-full object-cover object-top bg-[#F0BB1F]" 
                 />
               </div>
               
@@ -103,14 +112,11 @@ const Testimonials = () => {
 
             {/* Back Card (Stacked effect) */}
             <div 
-              className="absolute top-[80px] left-4 right-[-12px] sm:left-8 sm:right-[-32px] bottom-[-40px] bg-white rounded-[10px] border border-[#F7F7F7] shadow-[0_100px_80px_rgba(0,0,0,0.02)] -z-10 opacity-50 flex items-end p-6 sm:p-8 pb-4 cursor-pointer hover:opacity-70 transition-all duration-500 ease-in-out"
+              className="absolute top-[80px] left-4 right-[-12px] sm:left-8 sm:right-[-32px] bottom-[-40px] bg-white rounded-[10px] border border-[#F7F7F7] shadow-[0_100px_80px_rgba(0,0,0,0.02)] -z-10 opacity-50 flex items-end p-6 sm:p-8 pb-4 cursor-pointer hover:opacity-70 transition-all duration-300 ease-in-out"
               onClick={handleNext}
               title="Siguiente testimonio"
             >
-              <div className="w-full">
-                <h4 className="text-[#5E6282] font-bold text-[18px]">{nextTestimonial.name}</h4>
-                <p className="text-[#5E6282] text-sm font-medium">{nextTestimonial.role}</p>
-              </div>
+              {/* Vaciamos el texto de la tarjeta trasera para que no se superponga ni se asome por debajo */}
             </div>
 
           </div>
