@@ -35,7 +35,7 @@ const Footer = () => {
           </div>
 
           {/* Column 2: Links */}
-          <div>
+          <div className="hidden md:block">
             <h4 className="text-[#181E4B] font-bold text-xl mb-6">Secciones</h4>
             <ul className="space-y-4">
               <li><a href="#planes" className="text-[#5E6282] hover:text-[#DF6951] font-medium transition-colors flex items-center gap-2"><ArrowRight className="w-4 h-4" /> Planes Destacados</a></li>

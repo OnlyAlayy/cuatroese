@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Features from './components/Features'
@@ -8,6 +9,14 @@ import Footer from './components/Footer'
 import { MessageCircle } from 'lucide-react'
 
 function App() {
+  const [showTooltip, setShowTooltip] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowTooltip(false)
+    }, 5000)
+    return () => clearTimeout(timer)
+  }, [])
   return (
     <div className="min-h-screen bg-white font-sans overflow-x-hidden relative">
       {/* Background Decor */}
@@ -31,7 +40,7 @@ function App() {
       {/* Floating WhatsApp Button & Tooltip */}
       <div className="fixed bottom-6 right-6 z-50 flex items-center gap-4">
         {/* Tooltip / Cartel */}
-        <div className="bg-white px-4 py-2 rounded-xl shadow-lg border border-gray-100 animate-bounce relative hidden sm:block">
+        <div className={`bg-white px-4 py-2 rounded-xl shadow-lg border border-gray-100 relative hidden sm:block transition-opacity duration-1000 ${showTooltip ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
           <p className="text-[#14183E] font-medium text-sm">
             ¿Dudas? Escribinos
           </p>
@@ -40,7 +49,7 @@ function App() {
         </div>
 
         {/* Mobile-only subtle tooltip */}
-        <div className="sm:hidden bg-white px-3 py-1.5 rounded-lg shadow-lg border border-gray-100 animate-bounce absolute right-[70px] whitespace-nowrap">
+        <div className={`sm:hidden bg-white px-3 py-1.5 rounded-lg shadow-lg border border-gray-100 absolute right-[70px] whitespace-nowrap transition-opacity duration-1000 ${showTooltip ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
           <p className="text-[#14183E] font-medium text-xs">
             ¡Escribinos!
           </p>
