@@ -38,10 +38,20 @@ const Footer = () => {
           <div className="hidden md:block">
             <h4 className="text-[#181E4B] font-bold text-xl mb-6">Secciones</h4>
             <ul className="space-y-4">
-              <li><a href="#planes" className="text-[#5E6282] hover:text-[#DF6951] font-medium transition-colors flex items-center gap-2"><ArrowRight className="w-4 h-4" /> Planes Destacados</a></li>
-              <li><a href="#ventajas" className="text-[#5E6282] hover:text-[#DF6951] font-medium transition-colors flex items-center gap-2"><ArrowRight className="w-4 h-4" /> Nuestras Ventajas</a></li>
-              <li><a href="#pasos" className="text-[#5E6282] hover:text-[#DF6951] font-medium transition-colors flex items-center gap-2"><ArrowRight className="w-4 h-4" /> Cómo Funciona</a></li>
-              <li><a href="#testimonios" className="text-[#5E6282] hover:text-[#DF6951] font-medium transition-colors flex items-center gap-2"><ArrowRight className="w-4 h-4" /> Testimonios</a></li>
+              {[{id: 'planes', text: 'Planes Destacados'}, {id: 'ventajas', text: 'Nuestras Ventajas'}, {id: 'pasos', text: 'Cómo Funciona'}, {id: 'testimonios', text: 'Testimonios'}].map(link => (
+                <li key={link.id}>
+                  <a 
+                    href={`#${link.id}`} 
+                    className="text-[#5E6282] hover:text-[#DF6951] font-medium transition-colors flex items-center gap-2"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                  >
+                    <ArrowRight className="w-4 h-4" /> {link.text}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

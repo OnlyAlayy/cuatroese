@@ -27,6 +27,10 @@ const Navbar = () => {
             className="nav-link"
             tabIndex={0}
             aria-label={link.name}
+            onClick={(e) => {
+              e.preventDefault();
+              document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
+            }}
           >
             {link.name}
           </a>
@@ -60,7 +64,11 @@ const Navbar = () => {
           <a
             key={link.id}
             href={`#${link.id}`}
-            onClick={() => setIsMobileMenuOpen(false)}
+            onClick={(e) => {
+              e.preventDefault();
+              setIsMobileMenuOpen(false);
+              document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
+            }}
             className="text-2xl font-bold text-[#212832] hover:text-[#DF6951] transition-colors"
           >
             {link.name}
