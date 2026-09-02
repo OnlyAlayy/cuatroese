@@ -1,4 +1,4 @@
-
+import { Snowflake, Flame, Settings } from 'lucide-react'
 
 const Hero = () => {
   return (
@@ -6,12 +6,18 @@ const Hero = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
         
         {/* Left content */}
-        <div className="relative z-10">
-          <p className="text-sm font-bold text-[#DF6951] tracking-widest uppercase mb-6">
+        <div className="relative z-10 flex flex-col">
+          {/* Subtitle Desktop */}
+          <p className="hidden md:block text-sm font-bold text-[#DF6951] tracking-widest uppercase mb-6">
             Mantenimiento Programado
           </p>
 
-          <h1 className="font-heading mb-8 text-[3rem] leading-tight">
+          <h1 className="font-heading mb-4 md:mb-8 text-[3rem] leading-tight relative">
+            {/* Floating Icons Mobile */}
+            <Snowflake className="absolute -top-8 right-4 w-8 h-8 text-blue-400 opacity-60 md:hidden animate-[bounce_3s_ease-in-out_infinite]" />
+            <Flame className="absolute bottom-16 -left-4 w-8 h-8 text-orange-400 opacity-60 md:hidden animate-[bounce_4s_ease-in-out_infinite]" />
+            <Settings className="absolute top-1/2 -right-2 w-6 h-6 text-gray-400 opacity-50 md:hidden animate-[spin_6s_linear_infinite]" />
+            
             Servicio Técnico de{' '}
             <span className="relative inline-block">
               <span className="relative z-10">Calefacción</span>
@@ -21,6 +27,11 @@ const Hero = () => {
             y Refrigeración
           </h1>
 
+          {/* Subtitle Mobile */}
+          <p className="md:hidden text-sm font-bold text-[#DF6951] tracking-widest uppercase mb-6">
+            Mantenimiento Programado
+          </p>
+
           <p className="text-[#5E6282] text-base leading-relaxed max-w-md mb-10 font-medium">
             Técnicos especializados. Servicio con garantía. Atención personalizada.
             Prevenimos problemas y garantizamos la continuidad operativa de tus equipos.
@@ -28,7 +39,7 @@ const Hero = () => {
 
           {/* CTAs */}
           <div className="flex items-center gap-8">
-            <a href="#planes" className="btn-cta" tabIndex={0} aria-label="Ver Planes">
+            <a href="#planes" className="btn-cta relative z-20" tabIndex={0} aria-label="Ver Planes">
               Ver Planes
             </a>
           </div>
