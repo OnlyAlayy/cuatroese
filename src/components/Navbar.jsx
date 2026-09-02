@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
+import { smoothScrollTo } from '../utils/scroll'
 
 const navLinks = [
   { name: 'Planes', id: 'planes' },
@@ -29,7 +30,7 @@ const Navbar = () => {
             aria-label={link.name}
             onClick={(e) => {
               e.preventDefault();
-              document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
+              smoothScrollTo(link.id);
             }}
           >
             {link.name}
@@ -67,7 +68,7 @@ const Navbar = () => {
             onClick={(e) => {
               e.preventDefault();
               setIsMobileMenuOpen(false);
-              document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
+              smoothScrollTo(link.id);
             }}
             className="text-2xl font-bold text-[#212832] hover:text-[#DF6951] transition-colors"
           >

@@ -1,4 +1,5 @@
 import { MapPin, Phone, Mail, ArrowRight } from 'lucide-react'
+import { smoothScrollTo } from '../utils/scroll'
 
 const Footer = () => {
   return (
@@ -45,7 +46,7 @@ const Footer = () => {
                     className="text-[#5E6282] hover:text-[#DF6951] font-medium transition-colors flex items-center gap-2"
                     onClick={(e) => {
                       e.preventDefault();
-                      document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' });
+                      smoothScrollTo(link.id);
                     }}
                   >
                     <ArrowRight className="w-4 h-4" /> {link.text}
