@@ -30,7 +30,7 @@ const features = [
 
 const Features = () => {
   return (
-    <section id="ventajas" className="w-full max-w-7xl mx-auto px-6 py-24 relative z-10">
+    <section id="ventajas" className="w-full max-w-7xl mx-auto px-6 pt-0 pb-24 relative z-10">
       <div className="text-center mb-16">
         <p className="text-[#5E6282] font-semibold text-lg uppercase tracking-wider mb-2">
           Por qué elegirnos
@@ -54,7 +54,7 @@ const Features = () => {
               
               {/* The Card */}
               <div 
-                className="relative group flex flex-col items-center text-center p-8 rounded-[36px] bg-white transition-all duration-300 hover:shadow-[0_100px_80px_rgba(0,0,0,0.02),0_64.8px_46.85px_rgba(0,0,0,0.015),0_38.5px_25.48px_rgba(0,0,0,0.012),0_20px_13px_rgba(0,0,0,0.01),0_8.1px_6.52px_rgba(0,0,0,0.007),0_1.8px_3.15px_rgba(0,0,0,0.005)] hover:scale-105 z-10 h-full"
+                className="relative group flex flex-col items-center text-center p-8 rounded-[36px] bg-[#FAFAFA] border border-gray-200 shadow-md transition-all duration-300 hover:bg-white hover:shadow-[0_100px_80px_rgba(0,0,0,0.02),0_64.8px_46.85px_rgba(0,0,0,0.015),0_38.5px_25.48px_rgba(0,0,0,0.012),0_20px_13px_rgba(0,0,0,0.01),0_8.1px_6.52px_rgba(0,0,0,0.007),0_1.8px_3.15px_rgba(0,0,0,0.005)] hover:scale-105 z-10 h-full"
               >
                 
                 {/* Icon Container with subtle background shape */}

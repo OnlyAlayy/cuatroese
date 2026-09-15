@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Seguimiento de Casos</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root{
+    --navy:#1F3864;
+    --navy-light:#33507f;
+    --gold:#B08D57;
+    --bg:#F0F2F5;
+    --panel:#FFFFFF;
+    --line:#DDE1E8;
+    --text:#22262E;
+    --muted:#6B7280;
+    --green:#1E7B45;
+    --green-bg:#E5F3EA;
+    --amber:#A9660C;
+    --amber-bg:#FCF0DD;
+    --red:#B3261E;
+    --red-bg:#FBE8E7;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:14px;
+  }
+  #app{max-width:1400px;margin:0 auto;padding:28px 24px 60px;}
+
+  /* header */
+  .topbar{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:16px;}
+  .topbar h1{font-size:22px;margin:0 0 4px;color:var(--navy);font-weight:700;letter-spacing:-0.01em;}
+  .topbar p{margin:0;color:var(--muted);font-size:13px;}
+
+  .stats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+  .stat{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 16px;min-width:110px;}
+  .stat .n{font-family:'IBM Plex Mono',monospace;font-size:20px;font-weight:600;color:var(--navy);line-height:1.1;}
+  .stat .l{font-size:11.5px;color:var(--muted);margin-top:2px;}
+  .stat.demorado .n{color:var(--red);}
+  .stat.curso .n{color:var(--amber);}
+  .stat.cerrado .n{color:var(--green);}
+
+  .toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap;}
+  .search{flex:1;min-width:200px;max-width:320px;}
+  .search input{width:100%;padding:8px 12px;border:1px solid var(--line);border-radius:7px;font-family:inherit;font-size:13.5px;background:var(--panel);}
+  .btns{display:flex;gap:8px;}
+  button{
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:13px;
+    font-weight:600;
+    border-radius:7px;
+    border:1px solid transparent;
+    padding:8px 14px;
+    cursor:pointer;
+    transition:filter .12s ease;
+  }
+  button:hover{filter:brightness(0.95);}
+  .btn-primary{background:var(--navy);color:#fff;}
+  .btn-secondary{background:#fff;color:var(--navy);border:1px solid var(--line);}
+  .btn-danger{background:#fff;color:var(--red);border:1px solid var(--line);}
+  .btn-ghost{background:transparent;color:var(--muted);border:none;padding:4px 6px;font-weight:500;}
+  .btn-ghost:hover{color:var(--text);}
+
+  /* table */
+  .table-wrap{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:auto;}
+  table{border-collapse:collapse;width:100%;min-width:1100px;}
+  th{
+    text-align:left;
+    padding:10px 12px;
+    background:var(--navy);
+    color:#fff;
+    font-size:12px;
+    font-weight:600;
+    white-space:nowrap;
+    position:sticky;top:0;
+  }
+  th.custom{background:var(--navy-light);}
+  td{
+    padding:8px 12px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+    white-space:nowrap;
+  }
+  tr:last-child td{border-bottom:none;}
+  tr:hover td{background:#FAFBFC;}
+  td.wide{white-space:normal;min-width:160px;max-width:220px;}
+
+  .cell-input{
+    width:100%;
+    border:1px solid transparent;
+    background:transparent;
+    font-family:inherit;
+    font-size:13px;
+    padding:4px 6px;
+    border-radius:5px;
+    color:var(--text);
+  }
+  .cell-input:hover{border-color:var(--line);}
+  .cell-input:focus{outline:none;border-color:var(--navy);background:#fff;}
+  input[type=date].cell-input{font-family:'IBM Plex Mono',monospace;font-size:12.5px;}
+
+  .badge{
+    display:inline-block;
+    padding:3px 10px;
+    border-radius:20px;
+    font-size:11.5px;
+    font-weight:600;
+    white-space:nowrap;
+  }
+  .badge.cerrado{background:var(--green-bg);color:var(--green);}
+  .badge.curso{background:var(--amber-bg);color:var(--amber);}
+  .badge.demorado{background:var(--red-bg);color:var(--red);}
+
+  .dias{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--muted);display:block;margin-top:2px;}
+
+  .row-actions{display:flex;gap:4px;}
+  .icon-btn{
+    border:none;background:transparent;cursor:pointer;color:var(--muted);
+    font-size:14px;padding:4px 6px;border-radius:5px;
+  }
+  .icon-btn:hover{background:var(--red-bg);color:var(--red);}
+
+  .empty{padding:50px 20px;text-align:center;color:var(--muted);}
+  .empty .big{font-size:15px;color:var(--text);font-weight:600;margin-bottom:6px;}
+
+  /* modal */
+  .overlay{
+    position:fixed;inset:0;background:rgba(20,24,32,0.45);
+    display:flex;align-items:center;justify-content:center;z-index:50;
+    padding:20px;
+  }
+  .modal{
+    background:#fff;border-radius:12px;padding:24px;width:100%;max-width:420px;
+    max-height:86vh;overflow:auto;
+  }
+  .modal h2{margin:0 0 4px;font-size:17px;color:var(--navy);}
+  .modal .sub{font-size:12.5px;color:var(--muted);margin:0 0 18px;}
+  .field{margin-bottom:14px;}
+  .field label{display:block;font-size:12.5px;font-weight:600;margin-bottom:5px;color:var(--text);}
+  .field input, .field select{
+    width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:7px;
+    font-family:inherit;font-size:13.5px;
+  }
+  .field input:focus,.field select:focus{outline:none;border-color:var(--navy);}
+  .modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px;}
+
+  .footnote{margin-top:14px;font-size:12px;color:var(--muted);line-height:1.5;}
+  .loading{padding:40px;text-align:center;color:var(--muted);}
+</style>
+</head>
+<body>
+<div id="app"><div class="loading">Cargando seguimiento…</div></div>
+
+<script>
+const FIXED_COLUMNS = [
+  {id:'cliente', label:'Cliente', type:'text'},
+  {id:'pedidoInicial', label:'Pedido inicial', type:'date'},
+  {id:'envioOT', label:'Envío de OT', type:'date'},
+  {id:'avisoService', label:'Aviso al service', type:'date'},
+  {id:'visita', label:'Visita / Asistencia', type:'date'},
+  {id:'motivoDemora', label:'Motivo de demora', type:'text'},
+  {id:'cierre', label:'Cierre (OT+Factura firmadas)', type:'date'},
+];
+
+const DEMORA_LIMITE_DIAS = 3; // 72 hs
+
+let state = {
+  customColumns: [], // {id,label,type}
+  rows: [],
+};
+let searchTerm = '';
+let modal = null; // {type:'newCase'} | {type:'newField'} | {type:'confirmDelete', id}
+
+const STORAGE_KEY = 'tracker-data';
+
+async function loadState(){
+  try{
+    const res = await window.storage.get(STORAGE_KEY);
+    if(res && res.value){
+      const parsed = JSON.parse(res.value);
+      state.customColumns = parsed.customColumns || [];
+      state.rows = parsed.rows || [];
+    }
+  }catch(e){
+    // no data yet
+  }
+  render();
+}
+
+async function saveState(){
+  try{
+    await window.storage.set(STORAGE_KEY, JSON.stringify(state));
+  }catch(e){
+    console.error('No se pudo guardar', e);
+  }
+}
+
+function uid(){ return Math.random().toString(36).slice(2,10); }
+
+function daysBetween(a,b){
+  const d1 = new Date(a), d2 = new Date(b);
+  return Math.round((d2-d1)/(1000*60*60*24));
+}
+
+function getStatus(row){
+  if(row.values.cierre) return {key:'cerrado', label:'Cerrado'};
+  if(!row.values.pedidoInicial) return {key:'curso', label:'En curso'};
+  const today = new Date().toISOString().slice(0,10);
+  const dias = daysBetween(row.values.pedidoInicial, today);
+  if(!row.values.visita && dias > DEMORA_LIMITE_DIAS) return {key:'demorado', label:'Demorado', dias};
+  return {key:'curso', label:'En curso', dias};
+}
+
+function allColumns(){
+  return [...FIXED_COLUMNS, ...state.customColumns];
+}
+
+function updateCell(rowId, colId, value){
+  const row = state.rows.find(r=>r.id===rowId);
+  if(!row) return;
+  row.values[colId] = value;
+  saveState();
+  render();
+}
+
+function deleteRow(rowId){
+  state.rows = state.rows.filter(r=>r.id!==rowId);
+  modal = null;
+  saveState();
+  render();
+}
+
+function addCase(values){
+  state.rows.unshift({id:uid(), values});
+  saveState();
+  render();
+}
+
+function addColumn(label, type){
+  if(!label.trim()) return;
+  state.customColumns.push({id:'c_'+uid(), label:label.trim(), type});
+  saveState();
+  render();
+}
+
+function removeColumn(colId){
+  state.customColumns = state.customColumns.filter(c=>c.id!==colId);
+  state.rows.forEach(r=>{ delete r.values[colId]; });
+  saveState();
+  render();
+}
+
+function filteredRows(){
+  if(!searchTerm.trim()) return state.rows;
+  const q = searchTerm.toLowerCase();
+  return state.rows.filter(r=>
+    Object.values(r.values).some(v => (v||'').toString().toLowerCase().includes(q))
+  );
+}
+
+function computeStats(){
+  let curso=0, demorado=0, cerrado=0;
+  state.rows.forEach(r=>{
+    const s = getStatus(r);
+    if(s.key==='cerrado') cerrado++;
+    else if(s.key==='demorado') demorado++;
+    else curso++;
+  });
+  return {total: state.rows.length, curso, demorado, cerrado};
+}
+
+function fmtDate(d){
+  if(!d) return '';
+  const dt = new Date(d+'T00:00:00');
+  if(isNaN(dt)) return d;
+  return dt.toLocaleDateString('es-AR',{day:'2-digit',month:'2-digit',year:'2-digit'});
+}
+
+function render(){
+  const app = document.getElementById('app');
+  const stats = computeStats();
+  const rows = filteredRows();
+  const cols = allColumns();
+
+  app.innerHTML = `
+    <div class="topbar">
+      <div>
+        <h1>Seguimiento de casos</h1>
+        <p>Servicios técnicos — de pedido inicial a cierre</p>
+      </div>
+      <div class="btns">
+        <button class="btn-secondary" id="btnAddField">+ Agregar campo</button>
+        <button class="btn-secondary" id="btnDownload">⬇ Descargar reporte (Excel)</button>
+        <button class="btn-primary" id="btnAddCase">+ Nuevo caso</button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="n">${stats.total}</div><div class="l">Total de casos</div></div>
+      <div class="stat curso"><div class="n">${stats.curso}</div><div class="l">En curso</div></div>
+      <div class="stat demorado"><div class="n">${stats.demorado}</div><div class="l">Demorados (&gt;72hs sin visita)</div></div>
+      <div class="stat cerrado"><div class="n">${stats.cerrado}</div><div class="l">Cerrados</div></div>
+    </div>
+
+    <div class="toolbar">
+      <div class="search"><input type="text" id="searchInput" placeholder="Buscar por cliente…" value="${escapeAttr(searchTerm)}"></div>
+    </div>
+
+    <div class="table-wrap">
+      ${rows.length ? renderTable(cols, rows) : renderEmpty()}
+    </div>
+
+    <p class="footnote">Los datos se guardan automáticamente en tu navegador. Un caso se marca <b>Demorado</b> si pasaron más de ${DEMORA_LIMITE_DIAS} días (72 hs) desde el pedido inicial sin registrar visita/asistencia.</p>
+  `;
+
+  document.getElementById('btnAddCase').onclick = ()=>{ modal={type:'newCase'}; renderModal(); };
+  document.getElementById('btnAddField').onclick = ()=>{ modal={type:'newField'}; renderModal(); };
+  document.getElementById('btnDownload').onclick = downloadExcelReport;
+  document.getElementById('searchInput').oninput = (e)=>{ searchTerm = e.target.value; render(); };
+
+  cols.filter(c=>c.id.startsWith('c_')).forEach(c=>{
+    const btn = document.getElementById('rmcol_'+c.id);
+    if(btn) btn.onclick = ()=> removeColumn(c.id);
+  });
+
+  rows.forEach(r=>{
+    cols.forEach(c=>{
+      const el = document.getElementById('cell_'+r.id+'_'+c.id);
+      if(el) el.onchange = (e)=> updateCell(r.id, c.id, e.target.value);
+    });
+    const del = document.getElementById('del_'+r.id);
+    if(del) del.onclick = ()=>{ modal = {type:'confirmDelete', id:r.id, cliente:r.values.cliente||'este caso'}; renderModal(); };
+  });
+
+  renderModal();
+}
+
+function renderEmpty(){
+  return `<div class="empty"><div class="big">Todavía no hay casos cargados</div>Usá "Nuevo caso" para empezar a registrar el seguimiento.</div>`;
+}
+
+function renderTable(cols, rows){
+  const headers = cols.map(c=> `<th${c.id.startsWith('c_')?' class="custom"':''}>${escapeHtml(c.label)}${c.id.startsWith('c_')?` <span class="icon-btn" id="rmcol_${c.id}" title="Quitar campo" style="padding:0 0 0 4px;">✕</span>`:''}</th>`).join('');
+
+  const body = rows.map(r=>{
+    const status = getStatus(r);
+    const cells = cols.map(c=>{
+      const val = r.values[c.id] || '';
+      const wide = c.id==='motivoDemora' ? ' wide' : '';
+      if(c.type==='date'){
+        return `<td><input type="date" class="cell-input" id="cell_${r.id}_${c.id}" value="${val}"></td>`;
+      }
+      return `<td class="${wide.trim()}"><input type="text" class="cell-input" id="cell_${r.id}_${c.id}" value="${escapeAttr(val)}" placeholder="—"></td>`;
+    }).join('');
+
+    const diasTag = status.key!=='cerrado' && status.dias!==undefined
+      ? `<span class="dias">${status.dias} día${status.dias===1?'':'s'} desde el pedido</span>` : '';
+
+    return `<tr>
+      ${cells}
+      <td><span class="badge ${status.key}">${status.label}</span>${diasTag}</td>
+      <td><div class="row-actions"><button class="icon-btn" id="del_${r.id}" title="Eliminar caso">🗑</button></div></td>
+    </tr>`;
+  }).join('');
+
+  return `<table>
+    <thead><tr>${headers}<th>Estado</th><th></th></tr></thead>
+    <tbody>${body}</tbody>
+  </table>`;
+}
+
+function renderModal(){
+  let existing = document.getElementById('modalOverlay');
+  if(existing) existing.remove();
+  if(!modal) return;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'overlay';
+  overlay.id = 'modalOverlay';
+
+  if(modal.type==='newCase'){
+    const cols = allColumns();
+    overlay.innerHTML = `
+      <div class="modal">
+        <h2>Nuevo caso</h2>
+        <p class="sub">Completá lo que tengas ahora; podés editar cualquier campo después desde la tabla.</p>
+        ${cols.map(c=>`
+          <div class="field">
+            <label>${escapeHtml(c.label)}</label>
+            <input type="${c.type==='date'?'date':'text'}" id="new_${c.id}">
+          </div>
+        `).join('')}
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancelModal">Cancelar</button>
+          <button class="btn-primary" id="saveCase">Guardar caso</button>
+        </div>
+      </div>`;
+    document.body.appendChild(overlay);
+    document.getElementById('cancelModal').onclick = closeModal;
+    document.getElementById('saveCase').onclick = ()=>{
+      const values = {};
+      cols.forEach(c=>{ values[c.id] = document.getElementById('new_'+c.id).value; });
+      if(!values.cliente || !values.cliente.trim()){
+        document.getElementById('new_cliente').style.borderColor = 'var(--red)';
+        return;
+      }
+      addCase(values);
+      closeModal();
+    };
+  }
+
+  if(modal.type==='newField'){
+    overlay.innerHTML = `
+      <div class="modal">
+        <h2>Agregar campo</h2>
+        <p class="sub">Se agregará como columna nueva a todos los casos.</p>
+        <div class="field">
+          <label>Nombre del campo</label>
+          <input type="text" id="newFieldLabel" placeholder="Ej: N° de OT, Técnico asignado…">
+        </div>
+        <div class="field">
+          <label>Tipo de dato</label>
+          <select id="newFieldType">
+            <option value="text">Texto</option>
+            <option value="date">Fecha</option>
+          </select>
+        </div>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancelModal">Cancelar</button>
+          <button class="btn-primary" id="saveField">Agregar</button>
+        </div>
+      </div>`;
+    document.body.appendChild(overlay);
+    document.getElementById('cancelModal').onclick = closeModal;
+    document.getElementById('saveField').onclick = ()=>{
+      const label = document.getElementById('newFieldLabel').value;
+      const type = document.getElementById('newFieldType').value;
+      if(!label.trim()) return;
+      addColumn(label, type);
+      closeModal();
+    };
+  }
+
+  if(modal.type==='confirmDelete'){
+    overlay.innerHTML = `
+      <div class="modal">
+        <h2>Eliminar caso</h2>
+        <p class="sub">¿Seguro que querés eliminar el caso de <b>${escapeHtml(modal.cliente)}</b>? Esta acción no se puede deshacer.</p>
+        <div class="modal-actions">
+          <button class="btn-secondary" id="cancelModal">Cancelar</button>
+          <button class="btn-danger" id="confirmDel">Eliminar</button>
+        </div>
+      </div>`;
+    document.body.appendChild(overlay);
+    document.getElementById('cancelModal').onclick = closeModal;
+    document.getElementById('confirmDel').onclick = ()=> deleteRow(modal.id);
+  }
+
+  overlay.addEventListener('click', (e)=>{ if(e.target===overlay) closeModal(); });
+}
+
+function closeModal(){
+  modal = null;
+  const existing = document.getElementById('modalOverlay');
+  if(existing) existing.remove();
+}
+
+function escapeHtml(s){
+  return (s||'').toString().replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+function escapeAttr(s){ return escapeHtml(s); }
+
+/* ---------------- Reporte Excel con gráficos ---------------- */
+
+function loadScript(src){
+  return new Promise((resolve, reject)=>{
+    if(document.querySelector(`script[src="${src}"]`)){ resolve(); return; }
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = ()=> resolve();
+    s.onerror = ()=> reject(new Error('No se pudo cargar la librería: '+src));
+    document.head.appendChild(s);
+  });
+}
+
+async function ensureExportLibs(){
+  if(!window.Chart){
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js');
+  }
+  if(!window.ExcelJS){
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/exceljs/4.4.0/exceljs.min.js');
+  }
+}
+
+function chartToImageBase64(config){
+  return new Promise(resolve=>{
+    const canvas = document.createElement('canvas');
+    canvas.width = 640; canvas.height = 380;
+    canvas.style.display = 'none';
+    document.body.appendChild(canvas);
+    const chart = new window.Chart(canvas.getContext('2d'), config);
+    // animation is off, but give the browser one paint cycle before reading pixels
+    requestAnimationFrame(()=>{
+      requestAnimationFrame(()=>{
+        const dataUrl = canvas.toDataURL('image/png');
+        chart.destroy();
+        canvas.remove();
+        resolve(dataUrl.split(',')[1]);
+      });
+    });
+  });
+}
+
+function buildStatusChartConfig(stats){
+  return {
+    type:'doughnut',
+    data:{
+      labels:['En curso','Demorados','Cerrados'],
+      datasets:[{
+        data:[stats.curso, stats.demorado, stats.cerrado],
+        backgroundColor:['#A9660C','#B3261E','#1E7B45'],
+        borderWidth:0,
+      }]
+    },
+    options:{
+      animation:false,
+      responsive:false,
+      plugins:{
+        title:{display:true, text:'Distribución de casos por estado', font:{size:16, weight:'600'}, padding:{bottom:14}},
+        legend:{position:'bottom', labels:{font:{size:12}}}
+      }
+    }
+  };
+}
+
+function buildClienteChartConfig(){
+  const counts = {};
+  state.rows.forEach(r=>{
+    const name = (r.values.cliente || 'Sin nombre').trim() || 'Sin nombre';
+    counts[name] = (counts[name]||0) + 1;
+  });
+  const entries = Object.entries(counts).sort((a,b)=>b[1]-a[1]).slice(0,10);
+  return {
+    type:'bar',
+    data:{
+      labels: entries.map(e=>e[0]),
+      datasets:[{ label:'Casos', data: entries.map(e=>e[1]), backgroundColor:'#1F3864' }]
+    },
+    options:{
+      indexAxis:'y',
+      animation:false,
+      responsive:false,
+      plugins:{
+        title:{display:true, text:'Casos por cliente (top 10)', font:{size:16, weight:'600'}, padding:{bottom:14}},
+        legend:{display:false}
+      },
+      scales:{ x:{ beginAtZero:true, ticks:{ precision:0 } } }
+    }
+  };
+}
+
+function buildDemoraChartConfig(){
+  // días transcurridos desde el pedido, para los casos abiertos (no cerrados)
+  const today = new Date().toISOString().slice(0,10);
+  const abiertos = state.rows.filter(r=>!r.values.cierre && r.values.pedidoInicial);
+  const labels = abiertos.map(r=> r.values.cliente || 'Sin nombre');
+  const dias = abiertos.map(r=> daysBetween(r.values.pedidoInicial, today));
+  const colors = dias.map(d=> d > DEMORA_LIMITE_DIAS ? '#B3261E' : '#A9660C');
+  return {
+    type:'bar',
+    data:{ labels, datasets:[{ label:'Días desde el pedido', data: dias, backgroundColor: colors }] },
+    options:{
+      animation:false,
+      responsive:false,
+      plugins:{
+        title:{display:true, text:'Días abiertos por caso (casos en curso)', font:{size:16, weight:'600'}, padding:{bottom:14}},
+        legend:{display:false}
+      },
+      scales:{ y:{ beginAtZero:true, ticks:{ precision:0 } } }
+    }
+  };
+}
+
+async function downloadExcelReport(){
+  const btn = document.getElementById('btnDownload');
+  const originalLabel = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Generando…';
+  try{
+    await ensureExportLibs();
+
+    const cols = allColumns();
+    const stats = computeStats();
+
+    // ---- imágenes de gráficos ----
+    const statusImg = await chartToImageBase64(buildStatusChartConfig(stats));
+    const clienteImg = await chartToImageBase64(buildClienteChartConfig());
+    const demoraImg = state.rows.some(r=>!r.values.cierre)
+      ? await chartToImageBase64(buildDemoraChartConfig())
+      : null;
+
+    const wb = new window.ExcelJS.Workbook();
+    wb.creator = 'Seguimiento de Casos';
+    wb.created = new Date();
+
+    // ---- Hoja Resumen ----
+    const wsResumen = wb.addWorksheet('Resumen');
+    wsResumen.getColumn(1).width = 4;
+    wsResumen.mergeCells('B2:F2');
+    wsResumen.getCell('B2').value = 'Reporte de seguimiento de casos';
+    wsResumen.getCell('B2').font = { size:16, bold:true, color:{argb:'FF1F3864'} };
+    wsResumen.mergeCells('B3:F3');
+    wsResumen.getCell('B3').value = 'Generado el ' + new Date().toLocaleDateString('es-AR');
+    wsResumen.getCell('B3').font = { size:10, color:{argb:'FF6B7280'} };
+
+    const summaryRows = [
+      ['Métrica','Valor'],
+      ['Total de casos', stats.total],
+      ['En curso', stats.curso],
+      ['Demorados (>72hs sin visita)', stats.demorado],
+      ['Cerrados', stats.cerrado],
+    ];
+    summaryRows.forEach((r, i)=>{
+      const row = wsResumen.getRow(5+i);
+      row.getCell(2).value = r[0];
+      row.getCell(3).value = r[1];
+      if(i===0){
+        row.getCell(2).font = { bold:true, color:{argb:'FFFFFFFF'} };
+        row.getCell(3).font = { bold:true, color:{argb:'FFFFFFFF'} };
+        row.getCell(2).fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FF1F3864'} };
+        row.getCell(3).fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FF1F3864'} };
+      }
+    });
+    wsResumen.getColumn(2).width = 30;
+    wsResumen.getColumn(3).width = 14;
+
+    const img1 = wb.addImage({ base64: statusImg, extension:'png' });
+    wsResumen.addImage(img1, { tl:{col:4.5, row:4}, ext:{width:420, height:250} });
+
+    const img2 = wb.addImage({ base64: clienteImg, extension:'png' });
+    wsResumen.addImage(img2, { tl:{col:1.5, row:18}, ext:{width:460, height:280} });
+
+    if(demoraImg){
+      const img3 = wb.addImage({ base64: demoraImg, extension:'png' });
+      wsResumen.addImage(img3, { tl:{col:1.5, row:37}, ext:{width:520, height:280} });
+    }
+
+    // ---- Hoja Casos (datos completos) ----
+    const wsCasos = wb.addWorksheet('Casos');
+    const headerLabels = [...cols.map(c=>c.label), 'Estado', 'Días desde el pedido'];
+    const headerRow = wsCasos.addRow(headerLabels);
+    headerRow.eachCell(cell=>{
+      cell.font = { bold:true, color:{argb:'FFFFFFFF'} };
+      cell.fill = { type:'pattern', pattern:'solid', fgColor:{argb:'FF1F3864'} };
+      cell.alignment = { vertical:'middle' };
+    });
+
+    state.rows.forEach(r=>{
+      const status = getStatus(r);
+      const rowValues = cols.map(c=> r.values[c.id] || '');
+      rowValues.push(status.label);
+      rowValues.push(status.dias !== undefined ? status.dias : '');
+      const row = wsCasos.addRow(rowValues);
+      const statusCellIdx = cols.length + 1;
+      const statusCell = row.getCell(statusCellIdx);
+      const fillColor = status.key==='cerrado' ? 'FFE5F3EA' : status.key==='demorado' ? 'FFFBE8E7' : 'FFFCF0DD';
+      const fontColor = status.key==='cerrado' ? 'FF1E7B45' : status.key==='demorado' ? 'FFB3261E' : 'FFA9660C';
+      statusCell.fill = { type:'pattern', pattern:'solid', fgColor:{argb:fillColor} };
+      statusCell.font = { color:{argb:fontColor}, bold:true };
+    });
+    wsCasos.columns.forEach(col=>{ col.width = 20; });
+    wsCasos.getColumn(cols.findIndex(c=>c.id==='motivoDemora')+1).width = 30;
+    wsCasos.views = [{ state:'frozen', ySplit:1 }];
+
+    const buffer = await wb.xlsx.writeBuffer();
+    const blob = new Blob([buffer], { type:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `reporte_casos_${new Date().toISOString().slice(0,10)}.xlsx`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }catch(e){
+    console.error(e);
+    alert('No se pudo generar el reporte: ' + e.message);
+  }finally{
+    btn.disabled = false;
+    btn.textContent = originalLabel;
+  }
+}
+
+loadState();
+</script>
+</body>
+</html>

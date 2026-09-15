@@ -3,10 +3,8 @@ import { Menu, X } from 'lucide-react'
 import { smoothScrollTo } from '../utils/scroll'
 
 const navLinks = [
-  { name: 'Planes', id: 'planes' },
   { name: 'Ventajas', id: 'ventajas' },
-  { name: 'Cómo Funciona', id: 'pasos' },
-  { name: 'Testimonios', id: 'testimonios' }
+  { name: 'Cómo Funciona', id: 'pasos' }
 ]
 
 const Navbar = () => {

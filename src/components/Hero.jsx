@@ -36,7 +36,7 @@ const Hero = () => {
             Mantenimiento Programado
           </p>
 
-          <p className="text-[#5E6282] text-base leading-relaxed max-w-md mb-10 font-medium">
+          <p className="text-[#5E6282] text-base leading-relaxed max-w-[500px] mb-10 font-medium">
             Técnicos especializados. Servicio con garantía. Atención personalizada.
             Prevenimos problemas y garantizamos la continuidad operativa de tus equipos.
           </p>
