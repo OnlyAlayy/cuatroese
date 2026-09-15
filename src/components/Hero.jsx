@@ -43,8 +43,8 @@ const Hero = () => {
 
           {/* CTAs */}
           <div className="flex items-center gap-8">
-            <a href="#planes" className="btn-cta relative z-20" tabIndex={0} aria-label="Ver Planes">
-              Ver Planes
+            <a href="#pasos" className="btn-cta relative z-20" tabIndex={0} aria-label="Cómo Funciona">
+              Cómo Funciona
             </a>
           </div>
         </div>
