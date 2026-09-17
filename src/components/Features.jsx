@@ -11,13 +11,14 @@ const features = [
     title: 'Servicio con Garantía',
     description: 'Respaldo total en todas nuestras reparaciones y mantenimientos.',
     icon: ShieldCheck,
-    active: true,
+    activeDesktop: true,
     blobClass: '-top-2 -left-2 w-10 h-10 rounded-tr-[18px] rounded-bl-[8px]',
   },
   {
     title: 'Atención Personalizada',
     description: 'Asesoramiento y soporte enfocado en las necesidades de tu equipo.',
     icon: UserCheck,
+    activeMobile: true,
     blobClass: 'top-1 -right-4 w-10 h-10 rounded-tl-[18px] rounded-br-[8px]',
   },
   {
@@ -47,9 +48,14 @@ const Features = () => {
           return (
             <div key={index} className="relative">
               
-              {/* Decorative shape behind the active card (now outside so it doesn't scale on hover) */}
-              {feature.active && (
-                <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-[#DF6951] rounded-tl-[30px] rounded-br-[10px] z-0"></div>
+              {/* Decorative shape for desktop (hidden on mobile) */}
+              {feature.activeDesktop && (
+                <div className="hidden md:block absolute -bottom-6 -left-6 w-24 h-24 bg-[#DF6951] rounded-tl-[30px] rounded-br-[10px] z-0"></div>
+              )}
+              
+              {/* Decorative shape for mobile (hidden on desktop) */}
+              {feature.activeMobile && (
+                <div className="block md:hidden absolute -bottom-6 -left-6 w-24 h-24 bg-[#DF6951] rounded-tl-[30px] rounded-br-[10px] z-0"></div>
               )}
               
               {/* The Card */}
