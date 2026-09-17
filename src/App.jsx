@@ -42,7 +42,7 @@ function App() {
     <div className="min-h-screen bg-white font-sans relative overflow-x-clip">
       {/* Background Decor (Colorized to match CTA button #F1A501) */}
       <div
-        className="absolute top-0 right-0 w-[700px] h-[700px] md:w-[800px] md:h-[800px] pointer-events-none select-none z-0 bg-[#F1A501] opacity-30"
+        className="absolute -top-32 sm:top-0 right-0 w-[600px] h-[600px] md:w-[800px] md:h-[800px] pointer-events-none select-none z-0 bg-[#F1A501] opacity-30"
         style={{
           WebkitMaskImage: 'url(/assets/decore.png)',
           WebkitMaskSize: 'contain',
