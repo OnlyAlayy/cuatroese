@@ -41,8 +41,8 @@ const services = [
 
 const Services = () => {
   return (
-    <section id="pasos" className="w-full max-w-7xl mx-auto px-6 py-24 relative z-10">
-      <div className="text-center mb-16 max-w-2xl mx-auto">
+    <section id="pasos" className="w-full max-w-7xl mx-auto px-6 py-12 md:py-24 relative z-10">
+      <div className="text-center mb-10 md:mb-16 max-w-2xl mx-auto">
         <p className="text-[#5E6282] font-semibold text-lg uppercase tracking-wider mb-2">
           Cómo Funciona
         </p>

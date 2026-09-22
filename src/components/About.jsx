@@ -2,11 +2,11 @@ import React from 'react'
 
 const About = () => {
   return (
-    <section id="nosotros" className="w-full max-w-7xl mx-auto px-6 py-20 relative z-10">
+    <section id="nosotros" className="w-full max-w-7xl mx-auto px-6 py-12 lg:py-20 relative z-10">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         
         {/* Left Column: Text Content */}
-        <div className="flex flex-col">
+        <div className="flex flex-col text-center lg:text-left">
           <p className="text-[#5E6282] font-semibold text-lg uppercase tracking-wider mb-2">
             Quiénes Somos
           </p>
@@ -39,11 +39,11 @@ const About = () => {
           />
 
           {/* Two smaller photos overlapping */}
-          <div className="absolute -bottom-10 -left-10 w-[200px] h-[200px] bg-white p-2 rounded-2xl shadow-xl hidden sm:block">
+          <div className="absolute -bottom-6 -left-4 sm:-bottom-10 sm:-left-10 w-[120px] h-[120px] sm:w-[200px] sm:h-[200px] bg-white p-1.5 sm:p-2 rounded-xl sm:rounded-2xl shadow-xl z-20">
             <img 
               src="/assets/cb28a21b-5a03-4159-a054-0bae70202dc4.jpg" 
               alt="Personal de 4S CLIMA" 
-              className="w-full h-full object-cover rounded-xl"
+              className="w-full h-full object-cover rounded-lg sm:rounded-xl"
             />
           </div>
 

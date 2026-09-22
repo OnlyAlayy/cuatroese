@@ -50,12 +50,12 @@ const Hero = () => {
         </div>
 
         {/* Right image */}
-        <div className="hidden sm:flex relative justify-end min-h-[350px] sm:min-h-[500px]">
+        <div className="flex relative justify-center sm:justify-end min-h-[280px] sm:min-h-[500px] mt-8 sm:mt-0 w-full">
           {/* Hero image */}
           <img
             src="/assets/efe6b665-fe5e-44c4-bcbd-0d36a6d1ffcc.jpg"
             alt="Equipo de Aire Acondicionado"
-            className="w-full max-w-[450px] lg:max-w-[550px] h-[400px] mt-10 rounded-2xl object-cover shadow-2xl relative z-10 -ml-8 sm:-ml-16 lg:-ml-32"
+            className="w-full max-w-[320px] sm:max-w-[450px] lg:max-w-[550px] h-[250px] sm:h-[400px] sm:mt-10 rounded-2xl object-cover shadow-2xl relative z-10 sm:-ml-16 lg:-ml-32"
           />
         </div>
       </div>
