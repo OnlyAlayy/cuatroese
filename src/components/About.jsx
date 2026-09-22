@@ -10,9 +10,9 @@ const About = () => {
           <p className="text-[#5E6282] font-semibold text-lg uppercase tracking-wider mb-2">
             Quiénes Somos
           </p>
-          <h2 className="font-heading text-4xl md:text-5xl text-[#14183E] capitalize mb-8 leading-tight">
+          <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl text-[#14183E] capitalize mb-8 leading-tight">
             31 Años <br className="hidden md:block"/>
-            <span className="relative inline-block text-[#DF6951] whitespace-nowrap">
+            <span className="relative inline-block text-[#DF6951]">
               <span className="relative z-10">Nuestra trayectoria</span>
               <img src="/assets/underline.png" alt="" aria-hidden="true" className="absolute -bottom-1 left-4 w-full object-contain -z-10 opacity-60" />
             </span>
