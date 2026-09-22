@@ -14,7 +14,7 @@ const About = () => {
             31 Años <br className="hidden md:block"/>
             <span className="relative inline-block text-[#DF6951]">
               <span className="relative z-10">Nuestra trayectoria</span>
-              <img src="/assets/underline.png" alt="" aria-hidden="true" className="absolute bottom-2 left-0 w-full object-contain -z-10 opacity-60" />
+              <img src="/assets/underline.png" alt="" aria-hidden="true" className="absolute -bottom-1 left-0 w-full object-contain -z-10 opacity-60" />
             </span>
             <br /> habla por nosotros
           </h2>

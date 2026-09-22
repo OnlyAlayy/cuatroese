@@ -65,7 +65,8 @@ body {
   transition: all 0.2s;
 }
 .btn-signup:hover {
-  background: #212832;
+  background: #DF6951;
+  border-color: #DF6951;
   color: #ffffff;
 }
 
