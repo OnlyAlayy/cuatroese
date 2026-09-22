@@ -53,11 +53,6 @@ const Features = () => {
                 <div className="hidden md:block absolute -bottom-6 -left-6 w-24 h-24 bg-[#DF6951] rounded-tl-[30px] rounded-br-[10px] z-0"></div>
               )}
               
-              {/* Decorative shape for mobile (hidden on desktop) */}
-              {feature.activeMobile && (
-                <div className="block md:hidden absolute -bottom-6 -left-6 w-24 h-24 bg-[#DF6951] rounded-tl-[30px] rounded-br-[10px] z-0"></div>
-              )}
-              
               {/* The Card */}
               <div 
                 className="relative group flex flex-col items-center text-center p-8 rounded-[36px] bg-white border border-gray-200 shadow-md transition-all duration-300 hover:shadow-[0_100px_80px_rgba(0,0,0,0.02),0_64.8px_46.85px_rgba(0,0,0,0.015),0_38.5px_25.48px_rgba(0,0,0,0.012),0_20px_13px_rgba(0,0,0,0.01),0_8.1px_6.52px_rgba(0,0,0,0.007),0_1.8px_3.15px_rgba(0,0,0,0.005)] hover:scale-105 z-10 h-full"
