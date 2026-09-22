@@ -59,7 +59,7 @@ function App() {
 
       {/* Background Decore2 — Left side at Steps height */}
       <div
-        className="absolute -left-20 md:-left-40 w-[300px] h-[300px] md:w-[650px] md:h-[650px] pointer-events-none select-none z-0 bg-[#F1A501] opacity-20 md:opacity-30"
+        className="absolute -left-20 md:-left-40 w-[300px] h-[300px] md:w-[650px] md:h-[650px] pointer-events-none select-none z-0 bg-[#F1A501] opacity-30"
         style={{
           top: '120vh',
           WebkitMaskImage: 'url(/assets/Decore2.png)',
