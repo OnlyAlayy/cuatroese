@@ -25,7 +25,7 @@ const services = [
     delay: '150ms',
   },
   {
-    title: 'Servicio de Reparación',
+    title: 'Asesoramiento y Reparación',
     icon: PenTool,
     features: [
       'Asesoramiento',

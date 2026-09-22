@@ -95,18 +95,9 @@ function App() {
           <div className="absolute -bottom-2 right-5 w-0 h-0 border-l-[6px] border-l-transparent border-t-[8px] border-t-white border-r-[6px] border-r-transparent drop-shadow-sm"></div>
         </div>
 
-        {/* Mobile auto-show tooltip */}
-        <div className={`absolute bottom-[65px] right-0 sm:hidden bg-white px-3 py-1.5 rounded-lg shadow-lg border border-gray-100 whitespace-nowrap transition-opacity duration-1000 ${autoShow && !hovered ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-          <p className="text-[#14183E] font-medium text-xs">
-            ¡Escribinos!
-          </p>
-          {/* Triangle pointing down */}
-          <div className="absolute -bottom-1.5 right-5 w-0 h-0 border-l-[4px] border-l-transparent border-t-[6px] border-t-white border-r-[4px] border-r-transparent"></div>
-        </div>
-
         {/* 2. HOVER CHAT BUBBLE (Aparece a la izquierda al pasar el mouse) */}
         {hovered && (
-          <div className="chat-bubble-enter relative bg-white text-[#14183E] font-semibold text-sm px-4 py-2.5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.12)] whitespace-nowrap flex items-center mr-1">
+          <div className="chat-bubble-enter relative hidden sm:flex bg-white text-[#14183E] font-semibold text-sm px-4 py-2.5 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.12)] whitespace-nowrap items-center mr-1">
             Chatea con nosotros
             {/* Arrow pointing right */}
             <div className="absolute top-1/2 -right-[7px] -translate-y-1/2 w-0 h-0

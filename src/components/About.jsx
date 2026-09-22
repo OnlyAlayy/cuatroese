@@ -12,7 +12,7 @@ const About = () => {
           </p>
           <h2 className="font-heading text-4xl md:text-5xl text-[#14183E] capitalize mb-8 leading-tight">
             31 Años <br className="hidden md:block"/>
-            <span className="relative inline-block text-[#DF6951]">
+            <span className="relative inline-block text-[#DF6951] whitespace-nowrap">
               <span className="relative z-10">Nuestra trayectoria</span>
               <img src="/assets/underline.png" alt="" aria-hidden="true" className="absolute -bottom-1 left-4 w-full object-contain -z-10 opacity-60" />
             </span>
@@ -39,7 +39,7 @@ const About = () => {
           />
 
           {/* Two smaller photos overlapping */}
-          <div className="absolute -bottom-6 -left-4 sm:-bottom-10 sm:-left-10 w-[120px] h-[120px] sm:w-[200px] sm:h-[200px] bg-white p-1.5 sm:p-2 rounded-xl sm:rounded-2xl shadow-xl z-20">
+          <div className="absolute -bottom-2 -left-2 sm:-bottom-10 sm:-left-10 w-[120px] h-[120px] sm:w-[200px] sm:h-[200px] bg-white p-1.5 sm:p-2 rounded-xl sm:rounded-2xl shadow-xl z-20">
             <img 
               src="/assets/cb28a21b-5a03-4159-a054-0bae70202dc4.jpg" 
               alt="Personal de 4S CLIMA" 
