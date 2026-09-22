@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className="w-full bg-[#FAFAFA] pt-12 md:pt-24 pb-8 md:pb-12 mt-12 md:mt-20 relative overflow-hidden">
       
       {/* Decorative Blob */}
-      <div className="absolute right-0 bottom-0 w-64 h-64 bg-[#DF6951] opacity-5 rounded-tl-[100%] -z-0"></div>
+      <div className="absolute right-0 bottom-0 w-64 h-64 bg-[#DF6951] opacity-5 rounded-tl-[100%] z-0 pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-10 md:mb-16">
@@ -18,7 +18,6 @@ const Footer = () => {
               Mantenimiento profesional de calefacción y refrigeración. Nos anticipamos a los problemas para que tus equipos funcionen al 100% de su capacidad.
             </p>
             <div className="hidden md:flex gap-4">
-              {/* Instagram */}
               <a 
                 href="https://www.instagram.com/cuatroeseclima/" 
                 target="_blank" 
@@ -39,7 +38,11 @@ const Footer = () => {
           <div className="hidden md:block">
             <h4 className="text-[#181E4B] font-bold text-xl mb-6">Secciones</h4>
             <ul className="space-y-4">
-              {[{id: 'ventajas', text: 'Nuestras Ventajas'}, {id: 'pasos', text: 'Cómo Funciona'}].map(link => (
+              {[
+                {id: 'nosotros', text: 'Quiénes Somos?'},
+                {id: 'ventajas', text: '4S Clima División Servicio Técnico'},
+                {id: 'pasos', text: 'Cómo Funciona'}
+              ].map(link => (
                 <li key={link.id}>
                   <a 
                     href={`#${link.id}`} 
@@ -71,11 +74,12 @@ const Footer = () => {
                 </li>
                 <li className="flex items-start gap-3 text-[#5E6282]">
                   <MapPin className="w-5 h-5 flex-shrink-0 text-[#DF6951]" />
-                  <span className="font-medium text-[15px] sm:text-base">Atención en Buenos Aires</span>
+                  <span className="font-medium text-[15px] sm:text-base">
+                    Av. Córdoba 1432 8B — CABA, Argentina
+                  </span>
                 </li>
               </ul>
               
-              {/* Instagram Mobile (Sits to the right of the list) */}
               <a 
                 href="https://www.instagram.com/cuatroeseclima/" 
                 target="_blank" 
@@ -94,8 +98,9 @@ const Footer = () => {
 
           {/* Column 4: Newsletter or CTA */}
           <div>
-            <h4 className="text-[#181E4B] font-bold text-xl mb-6">Cotizá tu Plan</h4>
+            <h4 className="text-[#181E4B] font-bold text-xl mb-6">Comunicate con Nosotros</h4>
             <p className="text-[#5E6282] text-sm mb-4">
+              Agreguemos valor a tu próximo proyecto de climatización.<br/><br/>
               Dejanos tu email o escribinos directo por WhatsApp y armamos un presupuesto a medida.
             </p>
             <a 
@@ -113,7 +118,7 @@ const Footer = () => {
         {/* Copyright Bottom */}
         <div className="text-center pt-8 border-t border-gray-200">
           <p className="text-[#5E6282] text-sm font-medium">
-            © {new Date().getFullYear()} 4S CLIMA. Todos los derechos reservados.
+            © {new Date().getFullYear()} 4S CLIMA. Todos los derechos reservados. | Atención en Buenos Aires
           </p>
         </div>
       </div>

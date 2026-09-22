@@ -3,7 +3,8 @@ import { Menu, X } from 'lucide-react'
 import { smoothScrollTo } from '../utils/scroll'
 
 const navLinks = [
-  { name: 'Ventajas', id: 'ventajas' },
+  { name: 'Quiénes Somos', id: 'nosotros' },
+  { name: 'Nuestras Ventajas', id: 'ventajas' },
   { name: 'Cómo Funciona', id: 'pasos' }
 ]
 
@@ -13,12 +14,13 @@ const Navbar = () => {
   return (
     <nav className="w-full max-w-7xl mx-auto px-6 py-6 flex items-center justify-between relative z-50">
       {/* Logo */}
-      <a href="/" className="text-2xl font-bold text-[#212832] tracking-tight" aria-label="4S CLIMA Home">
-        4S CLIMA
+      <a href="/" className="text-xl md:text-2xl font-bold text-[#212832] tracking-tight leading-tight" aria-label="4S CLIMA Home">
+        4S CLIMA<br/>
+        <span className="text-sm font-semibold text-[#DF6951]">División Servicio Técnico</span>
       </a>
 
       {/* Desktop Links */}
-      <div className="hidden md:flex items-center gap-10">
+      <div className="hidden lg:flex items-center gap-10">
         {navLinks.map((link) => (
           <a
             key={link.id}
@@ -37,7 +39,7 @@ const Navbar = () => {
       </div>
 
       {/* Desktop Right side CTA */}
-      <div className="hidden md:flex items-center gap-6">
+      <div className="hidden lg:flex items-center gap-6">
         <a href="https://wa.me/541112345678" target="_blank" rel="noreferrer" className="btn-signup" tabIndex={0} aria-label="Solicitar Presupuesto">
           Solicitar Presupuesto
         </a>
@@ -45,7 +47,7 @@ const Navbar = () => {
 
       {/* Mobile hamburger button */}
       <button 
-        className="md:hidden text-[#212832] z-50" 
+        className="lg:hidden text-[#212832] z-50" 
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         tabIndex={0} 
         aria-label="Toggle menu"
@@ -55,7 +57,7 @@ const Navbar = () => {
 
       {/* Mobile Menu Overlay */}
       <div 
-        className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 md:hidden ${
+        className={`fixed inset-0 bg-white z-40 flex flex-col items-center justify-center gap-8 transition-transform duration-300 lg:hidden ${
           isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >

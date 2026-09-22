@@ -9,14 +9,14 @@ const features = [
   },
   {
     title: 'Servicio con Garantía',
-    description: 'Respaldo total en todas nuestras reparaciones y mantenimientos.',
+    description: 'Respaldo total en todas las reparaciones y mantenimientos.',
     icon: ShieldCheck,
     activeDesktop: true,
     blobClass: '-top-2 -left-2 w-10 h-10 rounded-tr-[18px] rounded-bl-[8px]',
   },
   {
     title: 'Atención Personalizada',
-    description: 'Asesoramiento y soporte enfocado en las necesidades de tu equipo.',
+    description: 'Asesoramiento y soporte enfocado en las necesidades del equipo.',
     icon: UserCheck,
     activeMobile: true,
     blobClass: 'top-1 -right-4 w-10 h-10 rounded-tl-[18px] rounded-br-[8px]',

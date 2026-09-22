@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
+import About from './components/About'
 import Features from './components/Features'
-import Steps from './components/Steps'
+import Services from './components/Services'
 import Footer from './components/Footer'
 import { MessageCircle } from 'lucide-react'
 
@@ -76,8 +77,9 @@ function App() {
       <div className="relative z-10">
         <Navbar />
         <Hero />
+        <About />
         <Features />
-        <Steps />
+        <Services />
         <Footer />
       </div>
 

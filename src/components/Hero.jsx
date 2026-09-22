@@ -53,9 +53,9 @@ const Hero = () => {
         <div className="hidden sm:flex relative justify-end min-h-[350px] sm:min-h-[500px]">
           {/* Hero image */}
           <img
-            src="/assets/hero-tecnico.png"
-            alt="Técnico de CLIMA 4S realizando mantenimiento de equipo de refrigeración"
-            className="w-full max-w-[450px] lg:max-w-[650px] object-contain relative z-10 -ml-8 sm:-ml-16 lg:-ml-32"
+            src="/assets/efe6b665-fe5e-44c4-bcbd-0d36a6d1ffcc.jpg"
+            alt="Equipo de Aire Acondicionado"
+            className="w-full max-w-[450px] lg:max-w-[550px] h-[400px] mt-10 rounded-2xl object-cover shadow-2xl relative z-10 -ml-8 sm:-ml-16 lg:-ml-32"
           />
         </div>
       </div>
